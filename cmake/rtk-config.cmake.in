@@ -1,0 +1,14 @@
+@PACKAGE_INIT@
+
+include("${CMAKE_CURRENT_LIST_DIR}/rtk-targets.cmake")
+
+set(rtk_FOUND TRUE)
+set(rtk_VERSION "@PROJECT_VERSION@")
+
+if(NOT rtk_FIND_QUIETLY)
+    message(STATUS "Found rtk ${rtk_VERSION}")
+endif()
+
+if(NOT TARGET rtk::rtk)
+    message(FATAL_ERROR "Target rtk::rtk was not found!")
+endif()
