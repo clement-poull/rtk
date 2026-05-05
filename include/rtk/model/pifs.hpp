@@ -600,16 +600,16 @@ namespace rtk
             std::vector<rtk::matxf> trans;
 
             /// \brief projection to use for a modeling space in arbitrary dimension
-            std::optional<std::shared_ptr<rtk::projection>> projection;
+            std::optional<std::shared_ptr<rtk::projection>> projection = std::nullopt;
 
             /// \brief projection to use for $\mathbb{R}^2$
-            std::optional<std::shared_ptr<rtk::projection>> projection_d2;
+            std::optional<std::shared_ptr<rtk::projection>> projection_d2 = std::nullopt;
 
             /// \brief projection to use for $\mathbb{R}^3$
-            std::optional<std::shared_ptr<rtk::projection>> projection_d3;
+            std::optional<std::shared_ptr<rtk::projection>> projection_d3 = std::nullopt;
 
             /// \brief attractor in barycentric space
-            std::vector<rtk::vecxf> attractor_bn;
+            std::vector<rtk::vecxf> attractor_bn{};
 
             /// \brief attractor in modeling space
             ///
@@ -617,13 +617,13 @@ namespace rtk
             /// std::vector<rtk::vecf<0>> attractor was projected using m.projection
             /// std::vector<rtk::vecf<2>> attractor was projected using m.projection_d2
             /// std::vector<rtk::vecf<3>> attractor was projected using m.projection_d3
-            std::variant<scion::usize, std::vector<rtk::vecf<0>>, std::vector<rtk::vecf<2>>, std::vector<rtk::vecf<3>>> attractor_rn;
+            std::variant<scion::usize, std::vector<rtk::vecf<0>>, std::vector<rtk::vecf<2>>, std::vector<rtk::vecf<3>>> attractor_rn = 2UZ;
 
             /// \brief flag for valid/invalid state
-            bool state;
+            bool state = false;
 
             /// \brief primitive to use for computing the attractor in barycentric space
-            std::vector<vecxf> primitive;
+            std::vector<vecxf> primitive{};
 
             /// \brief number of iteration to apply when computing the attractor
             scion::usize iterations = 4;
@@ -644,7 +644,7 @@ namespace rtk
 
                 /// \brief true if the attractor in modeling space is to be recomputed
                 bool attractor_rn = false;
-            } update_requests;
+            } update_requests{};
 
             /// \brief aggregate of the update processed
             struct {
@@ -659,7 +659,7 @@ namespace rtk
 
                 /// \brief true if the attractor in modeling space update was processed
                 bool attractor_rn = false;
-            } update_processed;
+            } update_processed{};
         } m;
 
     public: // public members

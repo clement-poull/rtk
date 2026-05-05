@@ -651,8 +651,6 @@ namespace rtk {
 
             std::vector<rtk::vec<Scalar, 2>> attractor{};
 
-            bool state;
-
             scion::usize iterations = 4;
         } m;
 

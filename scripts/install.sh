@@ -20,10 +20,12 @@
 set -euo pipefail
 
 CONFIG="release"
+PREFIX=""
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --config) CONFIG="$2"; shift 2 ;;
+    --prefix) PREFIX="$2"; shift 2 ;;
     *) echo "Unknown argument: $1" >&2; exit 1 ;;
   esac
 done
@@ -35,4 +37,8 @@ case "$CONFIG" in
   *) echo "Error: unknown config '${CONFIG}'." >&2; exit 1 ;;
 esac
 
-sudo cmake --build "./build/cmake-build-${CONFIG}" --target install -j "$(nproc 2>/dev/null || sysctl -n hw.logicalcpu 2>/dev/null || echo 1)"
+if [[ -n "${PREFIX}" ]]; then
+    cmake --install "./build/cmake-build-${CONFIG}" --prefix "${PREFIX}" --config "${CONFIG}"
+else
+    cmake --install "./build/cmake-build-${CONFIG}" --config "${CONFIG}"
+fi
